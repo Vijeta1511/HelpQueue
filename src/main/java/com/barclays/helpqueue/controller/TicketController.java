@@ -37,54 +37,54 @@ public class TicketController {
 	}
 	
 	// create ticket
-	@PostMapping("/createTicket")
+	@PostMapping("/tickets/create")
 	public ResponseEntity<Ticket> create(@RequestBody Ticket ticket) {
 		return new ResponseEntity<>(this.service.create(ticket), HttpStatus.CREATED);
 	}
 	
 	// read ticket by Id
-	@GetMapping("/readTicket/{id}")
+	@GetMapping("/tickets/read/{id}")
 	public ResponseEntity<Ticket> readById(@PathVariable Long id) {
 		return ResponseEntity.ok(this.service.readById(id));
 	}
 	
 	// get all tickets
-	@GetMapping("/allTickets")
+	@GetMapping("/tickets/all")
 	public ResponseEntity<List<Ticket>> readAll() {
 		return ResponseEntity.ok(this.service.readAll());
 	}
 	
 	// update ticket by id
-	@PutMapping("/update/{id}")
+	@PutMapping("/tickets/update/{id}")
 	public ResponseEntity<Ticket> updateById(@PathVariable Long id, @RequestBody Ticket newValues) {
 		return new ResponseEntity<>(this.service.updateById(id, newValues), HttpStatus.ACCEPTED);
 	}
 	
 	// add ticket to queue
-	@PutMapping("/addToQueue/{id}")
+	@PutMapping("/tickets/addToQueue/{id}")
 	public ResponseEntity<Ticket> addToQueue(@PathVariable Long id) {
 		return new ResponseEntity<>(this.service.addToQueue(id), HttpStatus.ACCEPTED);
 	}
 	
 	// remove ticket from queue
-	@PutMapping("/removeFromQueue/{id}")
+	@PutMapping("/tickets/removeFromQueue/{id}")
 	public ResponseEntity<Ticket> removeFromQueue(@PathVariable Long id) {
 		return new ResponseEntity<>(this.service.removeFromQueue(id), HttpStatus.ACCEPTED);
 	}
 	
 	// complete ticket and add solution
-	@PutMapping("/completeTicket/{id}")
+	@PutMapping("/tickets/completeTicket/{id}")
 	public ResponseEntity<Ticket> completeTicket(@PathVariable Long id, @RequestBody String solution) {
 		return new ResponseEntity<>(this.service.completeTicket(id, solution), HttpStatus.ACCEPTED);
 	}
 	
 	// assign ticket 
-	@PutMapping("/assignTicket/{id}")
+	@PutMapping("/tickets/assignTicket/{id}")
 	public ResponseEntity<Ticket> assignTicket(@PathVariable Long id, @RequestBody String assignee) {
 		return new ResponseEntity<>(this.service.assignTicket(id, assignee), HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/tickets/delete/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
 		if (this.service.deleteById(id)) {
 			return ResponseEntity.ok(this.service.deleteById(id));
@@ -94,37 +94,37 @@ public class TicketController {
 	}
 	
 	// get queue tickets
-	@GetMapping("/queueTickets")
+	@GetMapping({ "/", "/tickets" })
 	public ResponseEntity<List<Ticket>> getAllTicketsInQueue() {
 		return ResponseEntity.ok(this.service.getAllTicketsInQueue());
 	}
 	
 	// get completed tickets
-	@GetMapping("/completeTickets")
+	@GetMapping("/tickets/complete")
 	public ResponseEntity<List<Ticket>> getAllTicketsComplete() {
 		return ResponseEntity.ok(this.service.getAllTicketsComplete());
 	}
 	
 	// get queue tickets for Development 
-	@GetMapping("/queueTicketsDevelopment")
+	@GetMapping("/tickets/development")
 	public ResponseEntity<List<Ticket>> getAllTicketByQueueAndDepartmentDevelopment() {
 		return ResponseEntity.ok(this.service.getAllTicketByQueueAndDepartmentDevelopment());
 	}
 	
 	// get queue tickets for Deployment
-	@GetMapping("/queueTicketsDeployment")
+	@GetMapping("/tickets/deployment")
 	public ResponseEntity<List<Ticket>> getAllTicketByQueueAndDepartmentDeployment() {
 		return ResponseEntity.ok(this.service.getAllTicketByQueueAndDepartmentDeployment());
 	}
 	
 	// get Completed tickets for Development
-	@GetMapping("/completedTicketsDevelopment")
+	@GetMapping("/tickets/development/complete")
 	public ResponseEntity<List<Ticket>> getAllTicketsCompleteAndDepartmentDevelopment() {
 		return ResponseEntity.ok(this.service.getAllTicketsCompleteAndDepartmentDevelopment());
 	}
 	
 	// get Completed tickets for Deployment
-	@GetMapping("/completedTicketsDeployment")
+	@GetMapping("/tickets/deployment/complete")
 	public ResponseEntity<List<Ticket>> getAllTicketsCompleteAndDepartmentDeployment() {
 		return ResponseEntity.ok(this.service.getAllTicketsCompleteAndDepartmentDeployment());
 	}
