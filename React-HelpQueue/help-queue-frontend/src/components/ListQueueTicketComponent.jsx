@@ -18,7 +18,8 @@ class ListQueueTicketComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className="text-center">Ticket Queue</h2>
+                <h2 className="text-center"><br />Ticket Queue</h2>
+                <br />
                 <div className="row">
                     <table className= "table table-stripped table-bordered">
                         

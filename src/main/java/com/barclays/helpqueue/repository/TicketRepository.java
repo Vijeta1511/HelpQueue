@@ -16,7 +16,7 @@ import com.barclays.helpqueue.model.Ticket;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long>{
-	
+		
 	@Query(value = "SELECT * "
 			+ "FROM tickets "
 			+ "WHERE status_queue = ?1 "
@@ -45,5 +45,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long>{
 			+ "FROM tickets "
 			+ "WHERE id  = ?1", nativeQuery = true)
 	String findDepartmentById(Long id);
-	
+//	
+//	@Query(value = "INSERT INTO tickets (author, department, description, title) values (?, ?, ?, ?)", nativeQuery = true)
+//	Ticket createTicket(Boolean status_queue);
 }

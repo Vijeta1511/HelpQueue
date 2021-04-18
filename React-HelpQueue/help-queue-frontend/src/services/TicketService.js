@@ -5,7 +5,7 @@ const COMPLETED_TICKETS_URL = "http://localhost:9001/api/v1/tickets/complete";
 const DEVELOPMENT_QUEUE_TICKETS_URL = "http://localhost:9001/api/v1/tickets/development";
 const DEPLOYMENT_QUEUE_TICKETS_URL = "http://localhost:9001/api/v1/tickets/deployment";
 const DEVELOPMENT_COMPLETED_TICKETS_URL = "http://localhost:9001/api/v1/tickets/development/complete";
-const DEPLOYMENT_COMPLETED_TICKETS_URL = "http://localhost:9001/api/v1/tickets.deployment/complete";
+const DEPLOYMENT_COMPLETED_TICKETS_URL = "http://localhost:9001/api/v1/tickets/deployment/complete";
 
 
 class TicketService {

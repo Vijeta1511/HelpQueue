@@ -39,6 +39,12 @@ public class TicketController {
 	// create ticket
 	@PostMapping("/tickets/create")
 	public ResponseEntity<Ticket> create(@RequestBody Ticket ticket) {
+		ticket.setAsignee(null);
+		ticket.setSolution(null);
+		ticket.setTime_created(java.time.LocalDateTime.now());
+		ticket.setStatus_assign(false);
+		ticket.setStatus_complete(false);
+		ticket.setStatus_queue(false);
 		return new ResponseEntity<>(this.service.create(ticket), HttpStatus.CREATED);
 	}
 	

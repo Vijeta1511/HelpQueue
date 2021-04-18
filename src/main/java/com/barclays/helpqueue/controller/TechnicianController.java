@@ -7,10 +7,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.barclays.helpqueue.model.Technician;
 import com.barclays.helpqueue.service.TechnicianService;
 
 /**
@@ -31,10 +32,10 @@ public class TechnicianController {
 	
 		
 	// get assignee names 
-	@PostMapping("/assignTicket/{id}")
-	public ResponseEntity<List<String>> assignTicket(@PathVariable Long id) {
+	@GetMapping("/tickets/assignTicket/{id}")
+	public ResponseEntity<List<Technician>> assignTicket(@PathVariable Long id) {
 		return ResponseEntity.ok(this.service.getTechnicianByDepartment(id));
-	}
+	}	
 		
 }
 

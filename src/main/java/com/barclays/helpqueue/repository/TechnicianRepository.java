@@ -9,8 +9,8 @@ import com.barclays.helpqueue.model.Technician;
 
 public interface TechnicianRepository extends JpaRepository<Technician, Long>{
 
-	@Query(value = "SELECT name "
+	@Query(value = "SELECT * "
 			+ "FROM technicians "
 			+ "WHERE department = ?1", nativeQuery = true)
-	List<String> findTechnicianByDepartment(String department);
+	List<Technician> findTechnicianByDepartment(String department);
 }
