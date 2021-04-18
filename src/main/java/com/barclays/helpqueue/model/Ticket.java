@@ -65,37 +65,35 @@ public class Ticket {
 		super();
 	}
 	
-	
-	// Parameterised constructor
-	public Ticket(String title, String author, String description, String department) {
-		super();
-		this.title = title;
-		this.author = author;
-		this.description = description;
-		this.time_created = java.time.LocalDateTime.now();
-		this.department = department;
-		this.status_queue = false;
-		this.status_assign = false;
-		this.status_complete = false;
-	}
-	
 
-	public Ticket(Long id, String title, String author, String description, String department) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.author = author;
-		this.description = description;
-		this.time_created = java.time.LocalDateTime.now();
-		this.department = department;
-		this.status_queue = false;
-		this.status_assign = false;
-		this.status_complete = false;
-	}
+//	// Parameterised constructor
+//	public Ticket(String title, String author, String description, String department) {
+//		super();
+//		this.title = title;
+//		this.author = author;
+//		this.description = description;
+//		this.time_created = java.time.LocalDateTime.now();
+//		this.department = department;
+//		this.status_queue = false;
+//		this.status_assign = false;
+//		this.status_complete = false;
+//	}
+//	
+//
+//	public Ticket(Long id, String title, String author, String description, String department) {
+//		super();
+//		this.id = id;
+//		this.title = title;
+//		this.author = author;
+//		this.description = description;
+//		this.time_created = java.time.LocalDateTime.now();
+//		this.department = department;
+//		this.status_queue = false;
+//		this.status_assign = false;
+//		this.status_complete = false;
+//	}
+//	
 	
-	
-
-
 	public Ticket(Long id, String title, String author, String description, LocalDateTime time_created, String department,
 			String asignee, String solution, boolean status_queue, boolean status_assign, boolean status_complete) {
 		super();
@@ -113,13 +111,29 @@ public class Ticket {
 	}
 
 
-	public long getId() {
+	public Ticket(String title, String author, String description, LocalDateTime time_created, String department,
+			String asignee, String solution, boolean status_queue, boolean status_assign, boolean status_complete) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.description = description;
+		this.time_created = time_created;
+		this.department = department;
+		this.asignee = asignee;
+		this.solution = solution;
+		this.status_queue = status_queue;
+		this.status_assign = status_assign;
+		this.status_complete = status_complete;
+	}
+
+
+	public Long getId() {
 		return id;
 	}
 
 
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

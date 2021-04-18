@@ -20,6 +20,8 @@ public class TechnicianService {
 	
 	@Autowired
 	private TechnicianRepository repository;
+	
+	@Autowired
 	private TicketRepository ticketRepo;
 	
 	public TechnicianService(TechnicianRepository repository) {
@@ -31,9 +33,12 @@ public class TechnicianService {
 		return this.repository.findAll();
 	}
 	
-	public List<String> getTechnicianByDepartment(Long id) {
+	public List<Technician> getTechnicianByDepartment(Long id) {
+		System.out.println(id);
+
 		String department = ticketRepo.findDepartmentById(id);
-		List<String> technicians = this.repository.findTechnicianByDepartment(department);
+		System.out.println(department);
+		List<Technician> technicians = this.repository.findTechnicianByDepartment(department);
 		return technicians;
 	}
 
