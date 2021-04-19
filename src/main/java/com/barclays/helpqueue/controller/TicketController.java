@@ -3,7 +3,9 @@
  */
 package com.barclays.helpqueue.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,12 +69,11 @@ public class TicketController {
 	
 	// delete ticket
 	@DeleteMapping("/tickets/deleteTicket/{id}")
-	public ResponseEntity<?> deleteById(@PathVariable Long id) {
-		if (this.service.deleteById(id)) {
-			return ResponseEntity.ok(this.service.deleteById(id));
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+	public ResponseEntity<Map<String, Boolean>> deleteById(@PathVariable Long id) {
+		String deleted = this.service.deleteById(id);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put(deleted, Boolean.TRUE);
+		return ResponseEntity.ok(response);
 	}
 	
 	
