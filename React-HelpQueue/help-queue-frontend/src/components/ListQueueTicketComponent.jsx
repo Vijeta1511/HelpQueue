@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TicketService from '../services/TicketService';
+import {withRouter} from 'react-router-dom';
 
 class ListQueueTicketComponent extends Component {
     constructor(props) {
@@ -8,6 +9,26 @@ class ListQueueTicketComponent extends Component {
         this.state = {
             queueTickets: []
         }
+        this.editTicket = this.editTicket.bind(this);
+        this.assignTicket = this.assignTicket.bind(this);
+        this.resolveTicket = this.resolveTicket.bind(this);
+        this.deleteTicket = this.deleteTicket.bind(this);
+    }
+
+    editTicket(id){
+        this.props.history.push(`/update-ticket/${id}`);
+    }
+
+    assignTicket(id){
+        this.props.history.push(`/assign-ticket/${id}`);
+    }
+
+    resolveTicket(id){
+        this.props.history.push(`/solution-ticket/${id}`);
+    }
+
+    deleteTicket(id){
+        this.props.history.push(`/delete-ticket/${id}`);
     }
 
     componentDidMount() {
@@ -43,8 +64,16 @@ class ListQueueTicketComponent extends Component {
                                         <td> {queueTickets.author} </td>
                                         <td> {queueTickets.description} </td>
                                         <td> {queueTickets.department} </td>
-                                        <td> {queueTickets.assignee} </td>
+                                        <td> {queueTickets.asignee} </td>
                                         <td> {queueTickets.time_created} </td>
+                                        <td> <button onClick= { () => this.editTicket(queueTickets.id)} 
+                                        className = "btn btn-success"> Update </button>{' '}
+                                        <button onClick= { () => this.assignTicket(queueTickets.id)} 
+                                        className = "btn btn-success"> Assign </button>{' '}
+                                        <button onClick= { () => this.resolveTicket(queueTickets.id)} 
+                                        className = "btn btn-success"> Resolve </button>{' '}
+                                        <button onClick= { () => this.deleteTicket(queueTickets.id)} 
+                                        className = "btn btn-danger"> Delete </button></td>
                                     </tr>
                                 )
                             }
@@ -57,4 +86,4 @@ class ListQueueTicketComponent extends Component {
     }
 }
 
-export default ListQueueTicketComponent;
+export default withRouter(ListQueueTicketComponent);

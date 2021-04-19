@@ -37,60 +37,36 @@ public class TicketController {
 	}
 	
 	// create ticket
-	@PostMapping("/tickets/create")
+	@PostMapping("/tickets/createTicket")
 	public ResponseEntity<Ticket> create(@RequestBody Ticket ticket) {
-		ticket.setAsignee(null);
-		ticket.setSolution(null);
-		ticket.setTime_created(java.time.LocalDateTime.now());
-		ticket.setStatus_assign(false);
-		ticket.setStatus_complete(false);
-		ticket.setStatus_queue(false);
 		return new ResponseEntity<>(this.service.create(ticket), HttpStatus.CREATED);
 	}
 	
-	// read ticket by Id
-	@GetMapping("/tickets/read/{id}")
-	public ResponseEntity<Ticket> readById(@PathVariable Long id) {
-		return ResponseEntity.ok(this.service.readById(id));
-	}
-	
-	// get all tickets
-	@GetMapping("/tickets/all")
-	public ResponseEntity<List<Ticket>> readAll() {
-		return ResponseEntity.ok(this.service.readAll());
-	}
-	
 	// update ticket by id
-	@PutMapping("/tickets/update/{id}")
-	public ResponseEntity<Ticket> updateById(@PathVariable Long id, @RequestBody Ticket newValues) {
-		return new ResponseEntity<>(this.service.updateById(id, newValues), HttpStatus.ACCEPTED);
-	}
-	
-	// add ticket to queue
-	@PutMapping("/tickets/addToQueue/{id}")
-	public ResponseEntity<Ticket> addToQueue(@PathVariable Long id) {
-		return new ResponseEntity<>(this.service.addToQueue(id), HttpStatus.ACCEPTED);
-	}
-	
-	// remove ticket from queue
-	@PutMapping("/tickets/removeFromQueue/{id}")
-	public ResponseEntity<Ticket> removeFromQueue(@PathVariable Long id) {
-		return new ResponseEntity<>(this.service.removeFromQueue(id), HttpStatus.ACCEPTED);
+	@PutMapping("/tickets/updateTicket/{id}")
+	public ResponseEntity<Ticket> updateById(@PathVariable Long id, @RequestBody Ticket ticket) {
+		Ticket updatedTicket = this.service.updateById(id, ticket);
+		return ResponseEntity.ok(updatedTicket);
 	}
 	
 	// complete ticket and add solution
 	@PutMapping("/tickets/completeTicket/{id}")
-	public ResponseEntity<Ticket> completeTicket(@PathVariable Long id, @RequestBody String solution) {
-		return new ResponseEntity<>(this.service.completeTicket(id, solution), HttpStatus.ACCEPTED);
+	public ResponseEntity<Ticket> completeTicket(@PathVariable Long id, @RequestBody Ticket ticket) {
+		String solution = ticket.getSolution();
+		Ticket updatedTicket = this.service.completeTicket(id, solution);
+		return ResponseEntity.ok(updatedTicket);
 	}
 	
 	// assign ticket 
 	@PutMapping("/tickets/assignTicket/{id}")
-	public ResponseEntity<Ticket> assignTicket(@PathVariable Long id, @RequestBody String assignee) {
-		return new ResponseEntity<>(this.service.assignTicket(id, assignee), HttpStatus.ACCEPTED);
-	}
+	public ResponseEntity<Ticket> assignTicket(@PathVariable Long id, @RequestBody Ticket ticket) {
+		String asignee = ticket.getAsignee();
+		Ticket updatedTicket = this.service.assignTicket(id, asignee);
+		return ResponseEntity.ok(updatedTicket);
+	}	
 	
-	@DeleteMapping("/tickets/delete/{id}")
+	// delete ticket
+	@DeleteMapping("/tickets/deleteTicket/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
 		if (this.service.deleteById(id)) {
 			return ResponseEntity.ok(this.service.deleteById(id));
@@ -98,6 +74,7 @@ public class TicketController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
 	
 	// get queue tickets
 	@GetMapping({ "/", "/tickets" })
@@ -134,4 +111,34 @@ public class TicketController {
 	public ResponseEntity<List<Ticket>> getAllTicketsCompleteAndDepartmentDeployment() {
 		return ResponseEntity.ok(this.service.getAllTicketsCompleteAndDepartmentDeployment());
 	}
+	
+	
+	
+	// get ticket by Id
+	@GetMapping("/tickets/{id}")
+	public ResponseEntity<Ticket> readById(@PathVariable Long id) {
+		Ticket ticket = this.service.readById(id);
+		return ResponseEntity.ok(ticket);
+	}
+	
+	// get all tickets
+	@GetMapping("/tickets/all")
+	public ResponseEntity<List<Ticket>> readAll() {
+		return ResponseEntity.ok(this.service.readAll());
+	}
+	
+
+	
+//	
+//	// add ticket to queue
+//	@PutMapping("/tickets/addToQueue/{id}")
+//	public ResponseEntity<Ticket> addToQueue(@PathVariable Long id) {
+//		return new ResponseEntity<>(this.service.addToQueue(id), HttpStatus.ACCEPTED);
+//	}
+//	
+//	// remove ticket from queue
+//	@PutMapping("/tickets/removeFromQueue/{id}")
+//	public ResponseEntity<Ticket> removeFromQueue(@PathVariable Long id) {
+//		return new ResponseEntity<>(this.service.removeFromQueue(id), HttpStatus.ACCEPTED);
+//	}
 }
