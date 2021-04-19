@@ -64,9 +64,11 @@ public class TicketService {
 		return updatedTicket;
 	}
 	
-	public boolean deleteById(Long id) {
-		this.repository.deleteById(id);
-		return this.repository.existsById(id);
+	public String deleteById(Long id) {
+		Ticket toDelete = this.repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ticket does not exist with id :" + id));
+		this.repository.delete(toDelete);
+		String delete = "Deleted";
+		return delete;
 	}
 	
 	
