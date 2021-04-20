@@ -2,11 +2,9 @@
  * 
  */
 package com.barclays.helpqueue.service;
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.barclays.helpqueue.exception.ResourceNotFoundException;
 import com.barclays.helpqueue.model.Ticket;
 import com.barclays.helpqueue.repository.TicketRepository;
