@@ -24,7 +24,6 @@ import AssignTicketDeploymentComponent from './components/AssignTicketDeployment
 import AddSolutionTicketDeploymentComponent from './components/AddSolutionTicketDeploymentComponent';
 import DeleteTicketDeploymentComponent from './components/DeleteTicketDeploymentComponent';
 
-
 function App() {
   return (
     <div>
@@ -56,6 +55,7 @@ function App() {
                 <Route path = "/delete-ticket-deployment/:id" exact component = {DeleteTicketDeploymentComponent}></Route>
               </Switch>
             </div>
+            <br /><br /><br /><br />
           <FooterComponent />
       </Router>
     </div>

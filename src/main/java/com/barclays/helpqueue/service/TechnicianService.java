@@ -29,13 +29,7 @@ public class TechnicianService {
 		this.repository = repository;
 	}
 	
-	public List<Technician> readAll() {
-		return this.repository.findAll();
-	}
-	
 	public List<Technician> getTechnicianByDepartment(Long id) {
-		System.out.println(id);
-
 		String department = ticketRepo.findDepartmentById(id);
 		System.out.println(department);
 		List<Technician> technicians = this.repository.findTechnicianByDepartment(department);

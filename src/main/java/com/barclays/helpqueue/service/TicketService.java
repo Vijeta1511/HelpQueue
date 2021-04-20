@@ -71,6 +71,11 @@ public class TicketService {
 		return delete;
 	}
 	
+	public Ticket readById(Long id) {
+		Ticket ticket = this.repository.findById(id).
+				orElseThrow(() -> new ResourceNotFoundException("Ticket does not exist with id :" + id));
+		return ticket;
+	}
 	
 	public List<Ticket> getAllTicketsInQueue() {
 		return this.repository.findTicketInQueue(true);
@@ -95,27 +100,4 @@ public class TicketService {
 	public List<Ticket> getAllTicketsCompleteAndDepartmentDeployment() {
 		return this.repository.findTicketCompleteAndDepartment(true, "Deployment");
 	}
-	
-	
-	public Ticket readById(Long id) {
-		Ticket ticket = this.repository.findById(id).
-				orElseThrow(() -> new ResourceNotFoundException("Ticket does not exist with id :" + id));
-		return ticket;
-	}
-	
-	public List<Ticket> readAll() {
-		return this.repository.findAll();
-	}
-	
-//	public Ticket addToQueue(Long id) {
-//		Ticket toUpdate = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
-//		toUpdate.setStatus_queue(true);
-//		return this.repository.save(toUpdate);
-//	}
-//	
-//	public Ticket removeFromQueue(Long id) {
-//		Ticket toUpdate = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
-//		toUpdate.setStatus_queue(false);
-//		return this.repository.save(toUpdate);
-//	}
 }
