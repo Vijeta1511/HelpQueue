@@ -42,7 +42,7 @@ class ListQueueTicketComponent extends Component {
                 <h2 className="text-center"><br />Ticket Queue</h2>
                 <br />
                 <div className="row">
-                    <table className= "table table-stripped table-bordered">
+                    <table className= "table table-stripped table-bordered" style={{width: '1250px'}}>
                         
                         <thead>
                             <tr>
@@ -67,13 +67,13 @@ class ListQueueTicketComponent extends Component {
                                         <td> {queueTickets.asignee} </td>
                                         <td> {queueTickets.time_created} </td>
                                         <td> <button onClick= { () => this.editTicket(queueTickets.id)} 
-                                        className = "btn btn-success"> Update </button>{' '}
+                                        className = "btn btn-success"> Update </button>{' '}                                    
                                         <button onClick= { () => this.assignTicket(queueTickets.id)} 
                                         className = "btn btn-success"> Assign </button>{' '}
                                         <button onClick= { () => this.resolveTicket(queueTickets.id)} 
                                         className = "btn btn-success"> Resolve </button>{' '}
                                         <button onClick= { () => this.deleteTicket(queueTickets.id)} 
-                                        className = "btn btn-danger"> Delete </button></td>
+                                        className = "btn btn-danger">Delete </button></td>
                                     </tr>
                                 )
                             }

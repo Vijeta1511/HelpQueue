@@ -23,11 +23,13 @@ public interface TicketRepository extends JpaRepository<Ticket, Long>{
 			+ "ORDER BY time_created ASC", nativeQuery = true)
 	List<Ticket> findTicketInQueue(Boolean status_queue);
 	
+	
 	@Query(value = "SELECT * "
 			+ "FROM tickets "
 			+ "WHERE status_complete  = ?1 "
 			+ "ORDER BY time_created ASC", nativeQuery = true)
 	List<Ticket> findTicketComplete(Boolean status_complete);
+	
 	
 	@Query(value = "SELECT * "
 			+ "FROM tickets "
@@ -35,17 +37,16 @@ public interface TicketRepository extends JpaRepository<Ticket, Long>{
 			+ "ORDER BY time_created ASC", nativeQuery = true)
 	List<Ticket> findTicketByQueueAndDepartment(Boolean status_queue, String department);
 	
+	
 	@Query(value = "SELECT * "
 			+ "FROM tickets "
 			+ "WHERE status_complete  = ?1 AND department = ?2  "
 			+ "ORDER BY time_created ASC", nativeQuery = true)
 	List<Ticket> findTicketCompleteAndDepartment(Boolean status_complete, String department);
 	
+	
 	@Query(value = "SELECT department "
 			+ "FROM tickets "
 			+ "WHERE id  = ?1", nativeQuery = true)
 	String findDepartmentById(Long id);
-//	
-//	@Query(value = "INSERT INTO tickets (author, department, description, title) values (?, ?, ?, ?)", nativeQuery = true)
-//	Ticket createTicket(Boolean status_queue);
 }
