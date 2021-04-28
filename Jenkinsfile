@@ -26,7 +26,9 @@ pipeline {
             	echo 'Running backend test......'
             	sh 'cd ./backend'
             	sh 'pwd'
+            	dir('./backend'){
            		sh 'mvn test'
+           		}
             }
         }
         
