@@ -1,25 +1,48 @@
 pipeline {
-    agent any
 
-    environment {
-	firstvar = credentials('JenkinsCreds')
-	}
+    agent any
+	
     stages {
-        stage('Build') {
+    	
+    	stage('install-docker') {
+        
             steps {
-               sh 'echo "Hello World"'
-	       sh 'echo $firstvar_PSW' 
-	       sh 'echo $firstvar'
+            	echo 'Installing docker......'
+            	sh 'sudo apt-get update'
+           		sh 'curl https://get.docker.com | sudo bash'
+           		sh 'sudo chown ubuntu /var/run/docker.sock'
             }
         }
-        stage('Test') {
+    
+        stage('backend-test') {
+        
             steps {
-                sh 'echo "Hello World"'
+            	echo 'Running backend test......'
+            	sh 'cd backend'
+           		sh 'mvn test'
             }
         }
-        stage('Deploy') {
+        
+        stage('backend-build-run') {
+            
             steps {
-                sh 'echo "Hello World"'
+            
+                echo 'Running backend build and run......'
+            	sh 'cd backend'          	
+            	sh 'mvn clean install -DskipTests'
+            	sh 'docker build -t backend-build:1.0.1 .'
+                sh 'docker run -d -p 9001:9001 backend-build:1.0.1'
+                
+            }
+        }
+        
+        stage('frontend run') {
+        
+            steps {
+            	echo 'Running frontend on nginx......'
+                sh 'docker build -t react-frontend:1.0.1 .'
+                sh '8. docker run -d -p 80:80 react-frontend:1.0.1'
+                
             }
         }
     }
