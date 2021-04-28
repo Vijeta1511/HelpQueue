@@ -8,9 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                sh 'echo "Hello World"'
-	       sh 'echo $JenkinsCreds'
-	       sh 'echo $loginCreds'
-	       sh 'echo $JenkinsCreds_PSW' 
+	       sh 'echo $firstvar_PSW' 
 	       sh 'echo $firstvar'
             }
         }
