@@ -18,7 +18,7 @@ pipeline {
             	sh 'sudo apt-get update'
            		sh 'curl https://get.docker.com | sudo bash'
            		dir('/var/run'){
-           		sh 'sudo chown ubuntu /var/run/docker.sock'
+           		sh 'sudo chown ubuntu docker.sock'
            		}
             }
         }
