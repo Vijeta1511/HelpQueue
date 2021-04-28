@@ -7,7 +7,7 @@ pipeline {
     	stage('install-docker') {
         
             steps {
-            	echo 'Installing docker......'
+            	echo 'Installing docker.......'
             	sh 'sudo apt-get update'
            		sh 'curl https://get.docker.com | sudo bash'
            		sh 'sudo chown ubuntu /var/run/docker.sock'
