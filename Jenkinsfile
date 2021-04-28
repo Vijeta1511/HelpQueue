@@ -17,9 +17,7 @@ pipeline {
             	echo 'Installing docker.......'
             	sh 'sudo apt-get update'
            		sh 'curl https://get.docker.com | sudo bash'
-           		dir('/var/run'){
-           		sh 'sudo chown ubuntu docker.sock'
-           		}
+           		sh 'sudo chown ubuntu /var/run/docker.sock'
             }
         }
     
@@ -44,8 +42,8 @@ pipeline {
             	dir('./backend'){     
             	     	
 	            	sh 'mvn clean install -DskipTests'
-	            	sh 'docker build -t backend-build:1.0.1 .'
-	                sh 'docker run -d -p 9001:9001 backend-build:1.0.1'
+	            	sh 'sudo docker build -t backend-build:1.0.1 .'
+	                sh 'sudo docker run -d -p 9001:9001 backend-build:1.0.1'
 	                
                 }
             }
@@ -57,8 +55,8 @@ pipeline {
             	echo 'Running frontend on nginx......'
             	dir('./frontend'){ 
             	
-	                sh 'docker build -t react-frontend:1.0.1 .'
-	                sh 'docker run -d -p 80:80 react-frontend:1.0.1'
+	                sh 'sudo docker build -t react-frontend:1.0.1 .'
+	                sh 'sudo docker run -d -p 80:80 react-frontend:1.0.1'
 	                
                 }
             }
