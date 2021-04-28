@@ -24,8 +24,7 @@ pipeline {
         
             steps {
             	echo 'Running backend test......'
-            	sh 'pwd'
-            	sh 'cd ~'
+            	sh 'cd /home/ubuntu/HelpQueue/backend'
             	sh 'pwd'
            		sh 'mvn test'
             }
