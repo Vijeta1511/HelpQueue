@@ -1,6 +1,12 @@
 pipeline {
 
     agent any
+	
+    tools { 
+       
+	maven 'Maven 3.6.3' 
+
+    }
 
     stages {
     	
@@ -17,13 +23,9 @@ pipeline {
         stage('backend-test') {
         
             steps {
-            	withMaven(maven : 'apache-maven-3.6.3') {
-            	
-	            	echo 'Running backend test......'
-	            	sh 'cd backend'
-	           		sh 'mvn test'
-           		
-           		}
+            	echo 'Running backend test......'
+            	sh 'cd backend'
+           		sh 'mvn test'
             }
         }
         
@@ -31,15 +33,11 @@ pipeline {
             
             steps {
             
-            	withMaven(maven : 'apache-maven-3.6.3') {
-            
-	                echo 'Running backend build and run......'
-	            	sh 'cd backend'          	
-	            	sh 'mvn clean install -DskipTests'
-	            	sh 'docker build -t backend-build:1.0.1 .'
-	                sh 'docker run -d -p 9001:9001 backend-build:1.0.1'
-                
-                }
+                echo 'Running backend build and run......'
+            	sh 'cd backend'          	
+            	sh 'mvn clean install -DskipTests'
+            	sh 'docker build -t backend-build:1.0.1 .'
+                sh 'docker run -d -p 9001:9001 backend-build:1.0.1'
                 
             }
         }
