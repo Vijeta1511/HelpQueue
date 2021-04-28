@@ -24,7 +24,9 @@ pipeline {
         
             steps {
             	echo 'Running backend test......'
-            	sh 'cd backend'
+            	sh 'pwd'
+            	sh 'cd ~'
+            	sh 'pwd'
            		sh 'mvn test'
             }
         }
