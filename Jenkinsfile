@@ -1,13 +1,6 @@
 pipeline {
 
     agent any
-	
-    tools { 
-       
-	maven 'Maven 3.6.3' 
-	jdk 'jdk8' 
-
-    }
 
     stages {
     	
@@ -24,9 +17,13 @@ pipeline {
         stage('backend-test') {
         
             steps {
-            	echo 'Running backend test......'
-            	sh 'cd backend'
-           		sh 'mvn test'
+            	withMaven(maven : 'apache-maven-3.6.3') {
+            	
+	            	echo 'Running backend test......'
+	            	sh 'cd backend'
+	           		sh 'mvn test'
+           		
+           		}
             }
         }
         
@@ -34,11 +31,15 @@ pipeline {
             
             steps {
             
-                echo 'Running backend build and run......'
-            	sh 'cd backend'          	
-            	sh 'mvn clean install -DskipTests'
-            	sh 'docker build -t backend-build:1.0.1 .'
-                sh 'docker run -d -p 9001:9001 backend-build:1.0.1'
+            	withMaven(maven : 'apache-maven-3.6.3') {
+            
+	                echo 'Running backend build and run......'
+	            	sh 'cd backend'          	
+	            	sh 'mvn clean install -DskipTests'
+	            	sh 'docker build -t backend-build:1.0.1 .'
+	                sh 'docker run -d -p 9001:9001 backend-build:1.0.1'
+                
+                }
                 
             }
         }
@@ -48,7 +49,7 @@ pipeline {
             steps {
             	echo 'Running frontend on nginx......'
                 sh 'docker build -t react-frontend:1.0.1 .'
-                sh '8. docker run -d -p 80:80 react-frontend:1.0.1'
+                sh 'docker run -d -p 80:80 react-frontend:1.0.1'
                 
             }
         }
