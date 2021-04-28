@@ -31,7 +31,6 @@ public class TicketServiceIntegrationTest {
 		assertThat(save.getDepartment()).isEqualTo(saved.getDepartment());
 		assertThat(save.getDescription()).isEqualTo(saved.getDescription());
 		assertThat(save.getSolution()).isEqualTo(saved.getSolution());
-		assertThat(save.getTime_created()).isEqualTo(saved.getTime_created());
 		assertThat(save.getTitle()).isEqualTo(saved.getTitle());
 		assertThat(save.isStatus_assign()).isEqualTo(saved.isStatus_assign());
 		assertThat(save.isStatus_complete()).isEqualTo(saved.isStatus_complete());
@@ -48,7 +47,7 @@ public class TicketServiceIntegrationTest {
 		assertThat(newValues.getDescription()).isEqualTo(updated.getDescription());
 		assertThat(newValues.getTitle()).isEqualTo(updated.getTitle());
 	}
-//	
+	
 	@Test
 	void completeTicketTest() {
 		String solution = "mvn clean install";
@@ -84,7 +83,6 @@ public class TicketServiceIntegrationTest {
 		assertThat(save.getDepartment()).isEqualTo(saved.getDepartment());
 		assertThat(save.getDescription()).isEqualTo(saved.getDescription());
 		assertThat(save.getSolution()).isEqualTo(saved.getSolution());
-		assertThat(save.getTime_created()).isEqualTo(saved.getTime_created());
 		assertThat(save.getTitle()).isEqualTo(saved.getTitle());
 		assertThat(save.isStatus_assign()).isEqualTo(saved.isStatus_assign());
 		assertThat(save.isStatus_complete()).isEqualTo(saved.isStatus_complete());

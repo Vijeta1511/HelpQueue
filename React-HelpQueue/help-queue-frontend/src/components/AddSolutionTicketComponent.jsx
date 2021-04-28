@@ -50,7 +50,7 @@ class AddSolutionTicketComponent extends Component {
                                             value={this.state.solution} onChange={this.changeSolutionHandler}/>
                                         <br />
                                     </div>
-                                    <button className="btn btn-success" onClick={this.resolveTicket} style={{marginLeft: "150px"}}>Submit</button>
+                                    <button data-testid="solution-submit" className="btn btn-success" onClick={this.resolveTicket} style={{marginLeft: "150px"}}>Submit</button>
                                     <button className="btn btn-danger" onClick={this.cancel} style={{marginLeft: "10px"}}>Cancel</button>
                                 </form>
                             </div>

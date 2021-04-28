@@ -48,11 +48,11 @@ class HeaderComponent extends Component {
                         height="30"
                         className="d-inline-block align-top"
                     />
-                    <MyNavbar.Navbar.Brand href="/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Help Queue
+                    <MyNavbar.Navbar.Brand href="/" data-testid="Help-Queue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Help Queue
                     </MyNavbar.Navbar.Brand>
                     <MyNavbar.Nav variant="pills" defaultActiveKey="/" className="nav-items">
                         <MyNavbar.Nav.Item>
-                            <MyNavbar.Nav.Link onClick={()=> this.queueTickets()}>
+                            <MyNavbar.Nav.Link onClick={()=> this.queueTickets()} data-testid="Ticket-Queue">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -62,21 +62,21 @@ class HeaderComponent extends Component {
                             </MyNavbar.Nav.Link>
                         </MyNavbar.Nav.Item>
                         <MyNavbar.Nav.Item>
-                            <MyNavbar.Nav.Link onClick={()=> this.completedTickets()}>
+                            <MyNavbar.Nav.Link onClick={()=> this.completedTickets()} data-testid="Completed-Tickets">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 Completed Tickets&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </MyNavbar.Nav.Link>
                         </MyNavbar.Nav.Item>
                         <MyNavbar.Nav.Item>
-                            <MyNavbar.NavDropdown title="Departments" id="collasible-nav-dropdown">
-                                <MyNavbar.NavDropdown.Item onClick={()=> this.developmentTickets()}>
+                            <MyNavbar.NavDropdown title="Departments" id="collasible-nav-dropdown" data-testid="Departments">
+                                <MyNavbar.NavDropdown.Item onClick={()=> this.developmentTickets()} data-testid="Development">
                                     Development</MyNavbar.NavDropdown.Item>
-                                <MyNavbar.NavDropdown.Item onClick={()=> this.deploymentTickets()}>
+                                <MyNavbar.NavDropdown.Item onClick={()=> this.deploymentTickets()} data-testid="Deployment">
                                     Deployment</MyNavbar.NavDropdown.Item>
                             </MyNavbar.NavDropdown>
                         </MyNavbar.Nav.Item>
                         <MyNavbar.Nav.Item>
-                            <MyNavbar.Nav.Link onClick={()=> this.createTicket()}>
+                            <MyNavbar.Nav.Link onClick={()=> this.createTicket()} data-testid="Create-Ticket">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -86,9 +86,7 @@ class HeaderComponent extends Component {
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 Create Ticket
                             </MyNavbar.Nav.Link>
                         </MyNavbar.Nav.Item>

@@ -77,7 +77,6 @@ public class Ticket {
 		this.status_complete = status_complete;
 	}
 
-
 	public Ticket(Long id, String title, String author, String description, String department) {
 		super();
 		this.id = id;
@@ -93,7 +92,7 @@ public class Ticket {
 		this.status_complete = false;
 
 	}
-	
+
 	public Ticket(String title, String author, String description, String department) {
 		super();
 		this.title = title;
