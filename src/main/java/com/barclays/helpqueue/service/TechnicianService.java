@@ -31,7 +31,6 @@ public class TechnicianService {
 	
 	public List<Technician> getTechnicianByDepartment(Long id) {
 		String department = ticketRepo.findDepartmentById(id);
-		System.out.println(department);
 		List<Technician> technicians = this.repository.findTechnicianByDepartment(department);
 		return technicians;
 	}

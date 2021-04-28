@@ -77,7 +77,6 @@ public class Ticket {
 		this.status_complete = status_complete;
 	}
 
-
 	public Ticket(Long id, String title, String author, String description, String department) {
 		super();
 		this.id = id;
@@ -93,22 +92,36 @@ public class Ticket {
 		this.status_complete = false;
 
 	}
-	
 
-	public Ticket(String title, String author, String description, LocalDateTime time_created, String department,
-			String asignee, String solution, boolean status_queue, boolean status_assign, boolean status_complete) {
+	public Ticket(String title, String author, String description, String department) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.description = description;
-		this.time_created = time_created;
 		this.department = department;
-		this.asignee = asignee;
-		this.solution = solution;
-		this.status_queue = status_queue;
-		this.status_assign = status_assign;
-		this.status_complete = status_complete;
+		this.time_created = java.time.LocalDateTime.now();
+		this.asignee = null;
+		this.solution = null;
+		this.status_queue = true;
+		this.status_assign = false;
+		this.status_complete = false;
+
 	}
+
+//	public Ticket(String title, String author, String description, LocalDateTime time_created, String department,
+//			String asignee, String solution, boolean status_queue, boolean status_assign, boolean status_complete) {
+//		super();
+//		this.title = title;
+//		this.author = author;
+//		this.description = description;
+//		this.time_created = time_created;
+//		this.department = department;
+//		this.asignee = asignee;
+//		this.solution = solution;
+//		this.status_queue = status_queue;
+//		this.status_assign = status_assign;
+//		this.status_complete = status_complete;
+//	}
 
 
 	public Long getId() {

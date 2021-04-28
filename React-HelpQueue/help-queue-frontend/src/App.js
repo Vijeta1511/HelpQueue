@@ -9,6 +9,7 @@ import ListQueueTicketsDevelopmentComponent from './components/ListQueueTicketsD
 import ListQueueTicketsDeploymentComponent from './components/ListQueueTicketsDeploymentComponent';
 import ListCompletedTicketsDevelopmentComponent from './components/ListCompletedTicketsDevelopmentComponent';
 import ListCompletedTicketsDeploymentComponent from './components/ListCompletedTicketsDeploymentComponent';
+
 import UpdateTicketComponent from './components/UpdateTicketComponent';
 import AssignTicketComponent from './components/AssignTicketComponent';
 import AddSolutionTicketComponent from './components/AddSolutionTicketComponent';
