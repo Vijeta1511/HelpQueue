@@ -24,7 +24,7 @@ pipeline {
         
             steps {
             	echo 'Running backend test......'
-            	sh 'cd /home/ubuntu/HelpQueue/backend'
+            	sh 'cd ./backend'
             	sh 'pwd'
            		sh 'mvn test'
             }
@@ -35,7 +35,7 @@ pipeline {
             steps {
             
                 echo 'Running backend build and run......'
-            	sh 'cd backend'          	
+            	sh 'cd ./backend'          	
             	sh 'mvn clean install -DskipTests'
             	sh 'docker build -t backend-build:1.0.1 .'
                 sh 'docker run -d -p 9001:9001 backend-build:1.0.1'
@@ -47,6 +47,7 @@ pipeline {
         
             steps {
             	echo 'Running frontend on nginx......'
+            	sh 'cd ./frontend' 
                 sh 'docker build -t react-frontend:1.0.1 .'
                 sh 'docker run -d -p 80:80 react-frontend:1.0.1'
                 
