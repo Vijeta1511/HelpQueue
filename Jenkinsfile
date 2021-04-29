@@ -28,7 +28,7 @@ pipeline {
             	
             	dir('./backend/src/main/resources'){
             	
-            		def props = """spring.profiles.active = test"""
+            		def props = "spring.profiles.active = test"
             		writeFile file: "application.properties", text: props
             		
             		}
@@ -48,7 +48,7 @@ pipeline {
                 echo 'Running backend build and run......'
             	dir('./backend/src/main/resources'){
             	
-            		def props = """spring.profiles.active = prod"""
+            		def props = "spring.profiles.active = prod"
             		writeFile file: "application.properties", text: props
             		
             		}
