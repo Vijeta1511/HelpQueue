@@ -50,6 +50,8 @@ pipeline {
             		dir('./backend'){   
             		
 	           		sh 'mvn clean install -Ptest'
+	           		
+	           		}
            		}
             }
         }
