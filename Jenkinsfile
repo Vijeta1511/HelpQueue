@@ -23,8 +23,8 @@ pipeline {
             	sh 'sudo apt-get update'
            		sh 'curl https://get.docker.com | sudo bash'
            		sh 'sudo chown ubuntu /var/run/docker.sock'
-           		sh 'docker stop $(docker ps -a -q)'
-           		sh 'docker system prune -a'
+           		sh 'sudo docker stop $(docker ps -a -q)'
+           		sh 'sudo docker system prune -a'
             }
         }
         
