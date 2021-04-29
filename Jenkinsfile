@@ -23,6 +23,7 @@ pipeline {
             	sh 'sudo apt-get update'
            		sh 'curl https://get.docker.com | sudo bash'
            		sh 'sudo chown ubuntu /var/run/docker.sock'
+           		sh 'docker system prune -a'
             }
         }
         
@@ -30,9 +31,10 @@ pipeline {
         
             steps {
             	echo 'Installing NodeJS.......'
-            	sh 'sudo apt update'
+            	sh 'curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -'
            		sh 'sudo apt install nodejs -y'
-           		sh 'sudo apt install npm -y'
+           		sh 'node --version'
+           		sh 'npm --version'
             }
         }
     
