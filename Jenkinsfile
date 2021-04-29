@@ -12,6 +12,7 @@ pipeline {
     environment {
     
         ENV_IP = '34.244.55.196'
+        
     }
 
     stages {
@@ -55,7 +56,7 @@ pipeline {
             }
         }
         
-        stage('backend-build-run') {
+        stage('backend-build-deploy') {
             
             steps {
      
@@ -71,7 +72,7 @@ pipeline {
             }
         }
         
-        stage('frontend build-run') {
+        stage('frontend-build-deploy') {
         
             steps {
             
