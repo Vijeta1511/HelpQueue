@@ -46,20 +46,10 @@ pipeline {
             	script {
             
             	echo 'Running backend test......'
-            	
-            	dir('./backend/src/main/resources'){
-            	
-            		def props = "spring.profiles.active = test"
-            		
-            		writeFile(file: 'application.properties', text: props)
-            		
-            		}
             		
             		dir('./backend'){   
             		
-	           		sh 'mvn test'
-	           		
-	           		}
+	           		sh 'mvn clean install -Ptest'
            		}
             }
         }
@@ -70,14 +60,7 @@ pipeline {
             	
             	script {
             
-                echo 'Running backend build and run......'
-            	dir('./backend/src/main/resources'){
-            	
-            		def props = "spring.profiles.active = prod"
-            		
-            		writeFile(file: 'application.properties', text: props)
-            		
-            		}
+                echo 'Running backend build and run......
             		
             		dir('./backend'){
             		
@@ -85,8 +68,7 @@ pipeline {
 	            	sh 'sudo docker build -t backend-build:1.0.1 .'
 	                sh 'sudo docker run -d -p 9001:9001 backend-build:1.0.1'
 	                
-	                }
-	                
+	                } 
                 }
             }
         }
