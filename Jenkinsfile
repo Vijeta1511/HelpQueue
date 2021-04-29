@@ -24,11 +24,15 @@ pipeline {
         stage('backend-test') {
         
             steps {
+            
+            	script {
+            
             	echo 'Running backend test......'
             	
             	dir('./backend/src/main/resources'){
             	
-            		def props = "spring.profiles.active = test\n"
+            		def props = "spring.profiles.active = test"
+            		
             		writeFile(file: 'application.properties', text: props)
             		
             		}
@@ -37,6 +41,7 @@ pipeline {
             		
 	           		sh 'mvn test'
 	           		
+	           		}
            		}
             }
         }
