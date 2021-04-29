@@ -19,6 +19,7 @@ pipeline {
     	stage('install-docker') {
         
             steps {
+            
             	echo 'Installing docker.......'
             	sh 'sudo apt-get update'
            		sh 'curl https://get.docker.com | sudo bash'
@@ -31,6 +32,7 @@ pipeline {
         stage('install-NodeJS') {
         
             steps {
+            
             	echo 'Installing NodeJS.......'
             	sh 'curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -'
            		sh 'sudo apt install nodejs -y'
@@ -42,16 +44,13 @@ pipeline {
         stage('backend-test') {
         
             steps {
-            
-            	script {
-            
+
             	echo 'Running backend test......'
             		
             		dir('./backend'){   
             		
-	           		sh 'mvn clean install -Ptest'
-	           		
-	           		}
+	           			sh 'mvn clean install -Ptest'
+
            		}
             }
         }
@@ -59,18 +58,15 @@ pipeline {
         stage('backend-build-run') {
             
             steps {
-            	
-            	script {
-            
+     
                 echo 'Running backend build and run......'
             		
             		dir('./backend'){
             		
-	            	sh 'mvn clean install -DskipTests'
-	            	sh 'sudo docker build -t backend-build:1.0.1 .'
-	                sh 'sudo docker run -d -p 9001:9001 backend-build:1.0.1'
-	                
-	                } 
+		            	sh 'mvn clean install -DskipTests'
+		            	sh 'sudo docker build -t backend-build:1.0.1 .'
+		                sh 'sudo docker run -d -p 9001:9001 backend-build:1.0.1'
+		                
                 }
             }
         }
@@ -78,6 +74,7 @@ pipeline {
         stage('frontend build-run') {
         
             steps {
+            
             	echo 'Running frontend on nginx......'
             	
             	dir('./frontend'){ 
