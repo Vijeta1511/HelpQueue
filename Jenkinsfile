@@ -53,6 +53,7 @@ pipeline {
         
             steps {
             	echo 'Running frontend on nginx......'
+            	
             	dir('./frontend'){ 
             	
 	                sh 'sudo docker build -t react-frontend:1.0.1 .'
