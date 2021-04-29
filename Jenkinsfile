@@ -24,7 +24,7 @@ pipeline {
            		sh 'curl https://get.docker.com | sudo bash'
            		sh 'sudo chown ubuntu /var/run/docker.sock'
            		sh 'sudo docker stop $(sudo docker ps -a -q)'
-           		sh 'sudo docker system prune -a -y'
+           		sh 'sudo docker system prune -af'
             }
         }
         
