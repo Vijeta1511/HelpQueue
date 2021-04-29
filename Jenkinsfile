@@ -8,6 +8,11 @@ pipeline {
 	jdk 'jdk8'
 
     }
+    
+    environment {
+    
+        ENV_IP = '34.244.55.196'
+    }
 
     stages {
     	
@@ -18,6 +23,16 @@ pipeline {
             	sh 'sudo apt-get update'
            		sh 'curl https://get.docker.com | sudo bash'
            		sh 'sudo chown ubuntu /var/run/docker.sock'
+            }
+        }
+        
+        stage('install-NodeJS') {
+        
+            steps {
+            	echo 'Installing NodeJS.......'
+            	sh 'sudo apt update'
+           		sh 'sudo apt install nodejs'
+           		sh 'sudo apt install npm'
             }
         }
     
@@ -73,13 +88,14 @@ pipeline {
             }
         }
         
-        stage('frontend run') {
+        stage('frontend build-run') {
         
             steps {
             	echo 'Running frontend on nginx......'
             	
             	dir('./frontend'){ 
-            	
+            		
+            		sh 'set "REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets" && npm run build'
 	                sh 'sudo docker build -t react-frontend:1.0.1 .'
 	                sh 'sudo docker run -d -p 80:80 react-frontend:1.0.1'
 	                
