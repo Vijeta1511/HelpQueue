@@ -95,6 +95,7 @@ pipeline {
             	
             	dir('./frontend'){ 
             		
+            		sh 'npm install'
             		sh 'set "REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets" && npm run build'
 	                sh 'sudo docker build -t react-frontend:1.0.1 .'
 	                sh 'sudo docker run -d -p 80:80 react-frontend:1.0.1'
