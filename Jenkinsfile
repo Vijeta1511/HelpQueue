@@ -31,8 +31,8 @@ pipeline {
             steps {
             	echo 'Installing NodeJS.......'
             	sh 'sudo apt update'
-           		sh 'sudo apt install nodejs'
-           		sh 'sudo apt install npm'
+           		sh 'sudo apt install nodejs -y'
+           		sh 'sudo apt install npm -y'
             }
         }
     
