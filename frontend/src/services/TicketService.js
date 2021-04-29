@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-// const QUEUE_TICKETS_URL = "http://localhost:9001/api/v1/tickets";
-
 class TicketService {
     getQueueTickets(){
         return axios.get(process.env.REACT_APP_BASE_URL);
