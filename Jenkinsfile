@@ -28,8 +28,8 @@ pipeline {
             	
             	dir('./backend/src/main/resources'){
             	
-            		def props = "spring.profiles.active = test"
-            		writeFile file: "application.properties", text: props
+            		def props = "spring.profiles.active = test\n"
+            		writeFile(file: 'application.properties', text: props)
             		
             		}
             		
