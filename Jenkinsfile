@@ -28,6 +28,10 @@ pipeline {
             	
             	dir('./backend'){
             	
+            		dir('./source/main/resources'){
+            		eval "echo 'spring.profiles.active = test'" > application.properties
+            		}
+            		
 	           		sh 'mvn test'
 	           		
            		}
@@ -41,6 +45,9 @@ pipeline {
                 echo 'Running backend build and run......'
             	dir('./backend'){     
             	     	
+            	    dir('./source/main/resources'){
+            		eval "echo 'spring.profiles.active = test'" > application.properties
+            		}
 	            	sh 'mvn clean install -DskipTests'
 	            	sh 'sudo docker build -t backend-build:1.0.1 .'
 	                sh 'sudo docker run -d -p 9001:9001 backend-build:1.0.1'
