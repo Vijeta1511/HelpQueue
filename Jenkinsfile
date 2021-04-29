@@ -23,6 +23,7 @@ pipeline {
             	sh 'sudo apt-get update'
            		sh 'curl https://get.docker.com | sudo bash'
            		sh 'sudo chown ubuntu /var/run/docker.sock'
+           		sh 'docker stop $(docker ps -a -q)'
            		sh 'docker system prune -a'
             }
         }
@@ -97,7 +98,7 @@ pipeline {
             	
             	dir('./frontend'){ 
             		
-            		sh '"REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets npm run build'
+            		sh 'REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets npm run build'
 	                sh 'sudo docker build -t react-frontend:1.0.1 .'
 	                sh 'sudo docker run -d -p 80:80 react-frontend:1.0.1'
 	                
