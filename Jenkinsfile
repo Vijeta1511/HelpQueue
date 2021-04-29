@@ -49,20 +49,25 @@ pipeline {
         stage('backend-build-run') {
             
             steps {
+            	
+            	script {
             
                 echo 'Running backend build and run......'
             	dir('./backend/src/main/resources'){
             	
             		def props = "spring.profiles.active = prod"
-            		writeFile file: "application.properties", text: props
+            		
+            		writeFile(file: 'application.properties', text: props)
             		
             		}
             		
-            		dir('./backend'){  
+            		dir('./backend'){
             		
 	            	sh 'mvn clean install -DskipTests'
 	            	sh 'sudo docker build -t backend-build:1.0.1 .'
 	                sh 'sudo docker run -d -p 9001:9001 backend-build:1.0.1'
+	                
+	                }
 	                
                 }
             }
