@@ -60,7 +60,7 @@ pipeline {
             	
             	script {
             
-                echo 'Running backend build and run......
+                echo 'Running backend build and run......'
             		
             		dir('./backend'){
             		
