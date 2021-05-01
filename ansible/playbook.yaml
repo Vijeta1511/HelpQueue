@@ -1,7 +1,7 @@
 ---
 - hosts: all
   become: true
-  
+
   tasks:
   - name: 'Print HelloWorld'
     debug: 
@@ -10,5 +10,30 @@
   - name: 'Install curl'
     apt: 
       name: curl
+      state: latest
+      update_cache: yes
+
+- hosts: firstGroup
+  become: true
+  
+  tasks:
+  - name: 'Install nginx'
+    apt: 
+      name: nginx
+      state: latest
+      update_cache: yes
+
+  - name: 'check if nginx is running'
+    service:
+      name: nginx
+      state: started
+  
+- hosts: secondGroup
+  become: true
+  
+  tasks:
+  - name: 'Install Unzip'
+    apt: 
+      name: unzip
       state: latest
       update_cache: yes
