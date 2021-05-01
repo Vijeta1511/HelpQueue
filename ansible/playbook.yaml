@@ -27,7 +27,6 @@
       repo: deb https://pkg.jenkins.io/debian-stable binary/ 
       state: present
       
-
   - name: ensure jenkins is installed
     become: yes
     apt: 
