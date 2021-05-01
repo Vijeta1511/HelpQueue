@@ -8,6 +8,11 @@
     apt:
       update_cache: yes
 
+  - name: Update YUM package manager repositories cache
+    become: true
+    yum:
+      update_cache: yes
+
   - name: install wget
     yum:
       name: wget
