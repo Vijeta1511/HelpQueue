@@ -1,0 +1,7 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: 'Print HelloWorld'
+    debug: 
+      msg: "helloWorld" 
