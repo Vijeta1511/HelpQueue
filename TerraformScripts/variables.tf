@@ -95,6 +95,11 @@ variable "jenkinsEc2_instance_type" {
   default = "t2.medium"
 }
 
+//Test EC2
+variable "testEc2_name" {
+  default = "TestEC2"
+}
+
 //RDS Security Group
 variable "rds_sg_name" {
   default = "rds_sg"

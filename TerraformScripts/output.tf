@@ -47,6 +47,16 @@ output "aws_instance_jenkins_public_ip_address" {
   value = aws_instance.JenkinsEC2.public_ip
 }
 
+//aws_instance_test_id
+output "aws_instance_test_id" {
+  value = aws_instance.TestEC2.id
+}
+
+//aws_instance_test_public_ip_address
+output "aws_instance_test_public_ip_address" {
+  value = aws_instance.TestEC2.public_ip
+}
+
 //aws_security_group_rds_id
 output "aws_security_group_rds_id" {
   value = aws_security_group.rds_sg.id
