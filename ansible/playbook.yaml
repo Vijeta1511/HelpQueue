@@ -1,7 +1,14 @@
 ---
 - hosts: all
   become: true
+  
   tasks:
   - name: 'Print HelloWorld'
     debug: 
       msg: "helloWorld" 
+  
+  - name: 'Install curl'
+    apt: 
+      name: curl
+      state: latest
+      update_cache: yes
