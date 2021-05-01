@@ -8,60 +8,38 @@
     apt:
       update_cache: yes
 
-  - name: Update YUM package manager repositories cache
-    become: true
-    yum:
-      update_cache: yes
-
-  - name: install wget
-    yum:
-      name: wget
-      state: present
-
-  - name: install openjdk
+  - name: Install OpenJDK Java
+    become: yes
     apt:
       name: openjdk-8-jdk
+      state: present      
+
+  - name: ensure the jenkins apt repository key is installed
+    become: yes
+    apt_key: 
+      url: https://pkg.jenkins.io/debian-stable/jenkins.io.key 
       state: present
+      
 
-  - name: download jenkins.repo
-    get_url:
-      url: http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
-      dest: /etc/yum.repos.d/jenkins.repo
-
-  - name: import jenkins key
-    rpm_key:
+  - name: ensure the repository is configured
+    become: yes
+    apt_repository: 
+      repo: deb https://pkg.jenkins.io/debian-stable binary/ 
       state: present
-      key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
+      
 
-  - name: install jenkins
-    yum:
-      name: jenkins
-      state: present
+  - name: ensure jenkins is installed
+    become: yes
+    apt: 
+      name: jenkins 
+      update_cache: yes
+      
 
-  - name: start jenkins
-    systemd:
-      name: jenkins
+  - name: ensure jenkins is running
+    service: 
+      name: jenkins 
       state: started
-
-  - name: enable jenkins
-    systemd:
-      name: jenkins
-      enabled: true
-
-  - name: sleep for 30 seconds and continue with play
-    wait_for: 
-      timeout: 30
-    delegate_to: localhost
-
-  - name: init password jenkin
-    shell: cat /var/lib/jenkins/secrets/initialAdminPassword
-    changed_when: false
-    register: result
-
-  - name: print init password jenkins
-    debug:
-      var: result.stdout
-    
+  
   - name: "Add nodejs apt key"
     apt_key:
       url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
@@ -81,7 +59,9 @@
   - name: "Install NPM-distributed command-line tools"
     npm:
       global: yes
-      name: firebase-tools
+      name: "{{ item }}"
+    with_items:
+      - firebase-tools
 
   - name: ensure repository key is installed
     apt_key:
