@@ -84,9 +84,9 @@ pipeline {
                 echo 'Login DockerHub and push images......'
          		sh 'sudo docker images'
          		sh 'sudo docker login docker.io -u="${DOCKER_CREDS_USR}" -p="${DOCKER_CREDS_PSW}"'
-         		sh 'sudo docker tag frontend/react-frontend vijetaagrawal/frontend'
+         		sh 'sudo docker tag frontend vijetaagrawal/frontend'
          		sh 'sudo docker push ${DOCKER_CREDS_USR}/frontend'
-         		sh 'sudo docker tag backend/backend-build vijetaagrawal/backend'
+         		sh 'sudo docker tag backend vijetaagrawal/backend'
          		sh 'sudo docker push ${DOCKER_CREDS_USR}/backend'
          		
 
