@@ -13,7 +13,7 @@ pipeline {
     
         ENV_IP = '54.217.10.215'
         RDS_DB_URL = 'prod-rds.csqfw1gtm6ou.eu-west-1.rds.amazonaws.com:3306'
-
+        DOCKER_CREDS = credentials('Docker-Creds')
         
     }
 
@@ -83,6 +83,7 @@ pipeline {
      
                 echo 'Login DockerHub and push images......'
          		sh 'sudo docker images'
+         		sh 'sudo docker login -u="${DOCKER_CREDS_USR}" -p="${DOCKER_CREDS_PSW}"'
 
             }
         }
