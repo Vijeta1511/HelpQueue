@@ -64,6 +64,7 @@
             </activation>
             <properties>
                 <build.profile.id>prod</build.profile.id>
+                <jdbc.url>vijeta-db-3.csqfw1gtm6ou.eu-west-1.rds.amazonaws.com:3306</jdbc.url>
                 <profileActive>prod</profileActive>
             </properties>
         </profile>
