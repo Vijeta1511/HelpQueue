@@ -17,18 +17,6 @@ pipeline {
         
     }
 
-    stages {
-    	
-    	stage('install-docker') {
-        
-            steps {
-            
-            	echo 'Installing docker.......'
-            	
-           		sh 'sudo chown ubuntu /var/run/docker.sock'
-           		sh 'sudo docker system prune -af'
-            }
-        }
     
         stage('backend-test') {
         
