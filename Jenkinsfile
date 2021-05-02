@@ -53,7 +53,7 @@ pipeline {
             		dir('./backend'){
             		
 		            	sh 'mvn clean install -DskipTests'
-		            	sh 'sudo docker build --build-arg rds_url='jdbc:mysql://${RDS_DB_URL}/hq' -t backend/backend-build:1.0.1 .'
+		            	sh 'sudo docker build --build-arg rds_url=jdbc:mysql://${RDS_DB_URL}/hq -t backend/backend-build:1.0.1 .'
 		                sh 'sudo docker run -d -p 9001:9001 backend/backend-build:1.0.1'
 		                
                 }
