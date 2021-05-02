@@ -22,8 +22,7 @@ pipeline {
             steps {
             
             	echo 'changing file permissions and removing old images.......'
-            	sh 'sudo apt-get update'
-           		sh 'curl https://get.docker.com | sudo bash'
+            
            		sh 'sudo chown ubuntu /var/run/docker.sock'
            		sh 'sudo docker stop $(sudo docker ps -a -q)'
            		sh 'sudo docker system prune -af'
