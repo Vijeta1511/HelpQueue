@@ -5,6 +5,7 @@ pipeline {
     tools { 
        
 		maven 'Maven 3.6.3' 
+		jdk 'jdk8'
 
     }
     
@@ -66,7 +67,7 @@ pipeline {
             		dir('./backend'){
             		
 		            	sh 'mvn clean install -DskipTests'
-		            	sh 'sudo docker build -t backend-build:1.0.1 .'
+		            	sh 'sudo docker build --build-arg rds_url=jdbc:mysql://${RDS_DB_URL}/hq -t backend-build:1.0.1 ./backend'
 		                sh 'sudo docker run -d -p 9001:9001 backend-build:1.0.1'
 		                
                 }
@@ -83,10 +84,20 @@ pipeline {
             		
             		sh 'REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets npm install'
             		sh 'REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets npm run build'
-	                sh 'sudo docker build -t react-frontend:1.0.1 .'
+	                sh 'sudo docker build -t react-frontend:1.0.1 ./frontend'
 	                sh 'sudo docker run -d -p 80:80 react-frontend:1.0.1'
 	                
                 }
+            }
+        }
+        
+        stage('push-images-dockerhub') {
+            
+            steps {
+     
+                echo 'Login DockerHub and push images......'
+         		sh 'sudo docker images'
+
             }
         }
     }

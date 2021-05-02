@@ -219,28 +219,6 @@ resource "aws_instance" "JenkinsEC2" {
   ]
 }
 
-//Creating an EC2 instance to run Jenkins and Docker
-resource "aws_instance" "TestEC2" {
-  ami                    = var.jenkinsEc2_ami_id
-  instance_type          = var.jenkinsEc2_instance_type
-  key_name               = var.akp_key_name
-  subnet_id              = aws_subnet.publicSubnetA.id
-  vpc_security_group_ids = [aws_security_group.JenkinsEC2_sg.id]
-
-  tags = {
-    Name   = var.testEc2_name
-    Cohort = 3
-  }
-
-  associate_public_ip_address = true
-
-  depends_on = [
-    aws_subnet.publicSubnetA,
-    aws_key_pair.terraformKey,
-    aws_security_group.JenkinsEC2_sg
-  ]
-}
-
 //Creating a Security Group for RDS
 resource "aws_security_group" "rds_sg" {
   name        = var.rds_sg_name
