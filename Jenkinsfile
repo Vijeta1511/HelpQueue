@@ -29,18 +29,6 @@ pipeline {
            		sh 'sudo docker system prune -af'
             }
         }
-        
-        stage('install-NodeJS') {
-        
-            steps {
-            
-            	echo 'Installing NodeJS.......'
-            	sh 'curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -'
-           		sh 'sudo apt install nodejs -y'
-           		sh 'node --version'
-           		sh 'npm --version'
-            }
-        }
     
         stage('backend-test') {
         
@@ -65,8 +53,8 @@ pipeline {
             		dir('./backend'){
             		
 		            	sh 'mvn clean install -DskipTests'
-		            	sh 'sudo docker build --build-arg rds_url=jdbc:mysql://${RDS_DB_URL}/hq -t backend-build:1.0.1 ./backend'
-		                sh 'sudo docker run -d -p 9001:9001 backend-build:1.0.1'
+		            	sh 'sudo docker build --build-arg rds_url=jdbc:mysql://${RDS_DB_URL}/hq -t backend/backend-build:1.0.1 .'
+		                sh 'sudo docker run -d -p 9001:9001 backend/backend-build:1.0.1'
 		                
                 }
             }
@@ -82,8 +70,8 @@ pipeline {
             		
             		sh 'REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets npm install'
             		sh 'REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets npm run build'
-	                sh 'sudo docker build -t react-frontend:1.0.1 ./frontend'
-	                sh 'sudo docker run -d -p 80:80 react-frontend:1.0.1'
+	                sh 'sudo docker build -t frontend/react-frontend:1.0.1 .'
+	                sh 'sudo docker run -d -p 80:80 frontend/react-frontend:1.0.1'
 	                
                 }
             }
