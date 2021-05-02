@@ -53,8 +53,8 @@ pipeline {
             		dir('./backend'){
             		
 		            	sh 'mvn clean install -DskipTests'
-		            	sh 'sudo docker build --build-arg rds_url=jdbc:mysql://${RDS_DB_URL}/hq -t backend/backend-build .'
-		                sh 'sudo docker run -d -p 9001:9001 backend/backend-build'
+		            	sh 'sudo docker build --build-arg rds_url=jdbc:mysql://${RDS_DB_URL}/hq -t backend .'
+		                sh 'sudo docker run -d -p 9001:9001 backend'
 		                
                 }
             }
@@ -70,8 +70,8 @@ pipeline {
             		
             		sh 'REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets npm install'
             		sh 'REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets npm run build'
-	                sh 'sudo docker build -t frontend/react-frontend .'
-	                sh 'sudo docker run -d -p 80:80 frontend/react-frontend'
+	                sh 'sudo docker build -t frontend .'
+	                sh 'sudo docker run -d -p 80:80 frontend'
 	                
                 }
             }
@@ -83,11 +83,11 @@ pipeline {
      
                 echo 'Login DockerHub and push images......'
          		sh 'sudo docker images'
-         		sh 'sudo docker login -u="${DOCKER_CREDS_USR}" -p="${DOCKER_CREDS_PSW}" docker.io'
-         		sh 'sudo docker tag frontend/react-frontend ${DOCKER_CREDS_USR}/frontend/react-frontend'
-         		sh 'sudo docker push ${DOCKER_CREDS_USR}/frontend/react-frontend'
-         		sh 'sudo docker tag backend/backend-build ${DOCKER_CREDS_USR}/backend/backend-build'
-         		sh 'sudo docker push ${DOCKER_CREDS_USR}/backend/backend-build'
+         		sh 'sudo docker login docker.io -u="${DOCKER_CREDS_USR}" -p="${DOCKER_CREDS_PSW}"'
+         		sh 'sudo docker tag frontend/react-frontend vijetaagrawal/frontend'
+         		sh 'sudo docker push ${DOCKER_CREDS_USR}/frontend'
+         		sh 'sudo docker tag backend/backend-build vijetaagrawal/backend'
+         		sh 'sudo docker push ${DOCKER_CREDS_USR}/backend'
          		
 
             }
