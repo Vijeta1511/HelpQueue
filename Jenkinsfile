@@ -53,7 +53,7 @@ pipeline {
             		dir('./backend'){
             		
 		            	sh 'mvn clean install -DskipTests'
-		            	sh 'sudo docker build --build-arg rds_url=jdbc:mysql://${RDS_DB_URL}/hq backend/backend-build .'
+		            	sh 'sudo docker build --build-arg rds_url=jdbc:mysql://${RDS_DB_URL}/hq -t backend/backend-build .'
 		                sh 'sudo docker run -d -p 9001:9001 backend/backend-build'
 		                
                 }
@@ -70,7 +70,7 @@ pipeline {
             		
             		sh 'REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets npm install'
             		sh 'REACT_APP_BASE_URL=http://${ENV_IP}:9001/api/v1/tickets npm run build'
-	                sh 'sudo docker build frontend/react-frontend .'
+	                sh 'sudo docker build -t frontend/react-frontend .'
 	                sh 'sudo docker run -d -p 80:80 frontend/react-frontend'
 	                
                 }
@@ -87,6 +87,7 @@ pipeline {
          		sh 'sudo docker push ${DOCKER_CREDS_USR}/frontend/react-frontend'
          		sh 'sudo docker push ${DOCKER_CREDS_USR}/backend/backend-build'
          		
+
             }
         }
     }
