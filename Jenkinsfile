@@ -22,7 +22,7 @@ pipeline {
         
             steps {
 
-            	echo 'Running backend test......'
+            	echo 'Running all tests for backend......'
             		
             		dir('./backend'){   
             		
@@ -32,11 +32,11 @@ pipeline {
             }
         }
         
-        stage('backend-build-deploy') {
+        stage('backend-build-dockerize') {
             
             steps {
      
-                echo 'Running backend build and run......'
+                echo 'Building backend and running the image on this machine......'
             		
             		dir('./backend'){
             		
@@ -48,11 +48,11 @@ pipeline {
             }
         }
         
-        stage('frontend-build-deploy') {
+        stage('frontend-build-dockerize') {
         
             steps {
             
-            	echo 'Running frontend on nginx......'
+            	echo 'Building frontend and running the image on this machine.......'
             	
             	dir('./frontend'){ 
             		
@@ -65,16 +65,26 @@ pipeline {
             }
         }
         
+        stage('tagging-docker-images') {
+            
+            steps {
+     
+                echo 'Tagging frontend and backend images......'
+         		sh 'sudo docker images'
+         		sh 'sudo docker login docker.io -u="${DOCKER_CREDS_USR}" -p="${DOCKER_CREDS_PSW}"'
+         		sh 'sudo docker tag frontend vijetaagrawal/frontend'
+         		sh 'sudo docker tag backend vijetaagrawal/backend'
+         		
+
+            }
+        }
+        
         stage('push-images-dockerhub') {
             
             steps {
      
-                echo 'Login DockerHub and push images......'
-         		sh 'sudo docker images'
-         		sh 'sudo docker login docker.io -u="${DOCKER_CREDS_USR}" -p="${DOCKER_CREDS_PSW}"'
-         		sh 'sudo docker tag frontend vijetaagrawal/frontend'
+                echo 'Pushing frontend and backend images to dockerhub......'
          		sh 'sudo docker push vijetaagrawal/frontend'
-         		sh 'sudo docker tag backend vijetaagrawal/backend'
          		sh 'sudo docker push vijetaagrawal/backend'
          		
 
