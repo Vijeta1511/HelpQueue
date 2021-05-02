@@ -89,15 +89,5 @@
     apt: 
       name: docker-ce 
       update_cache: yes
-  
-  - name: 'Install nginx'
-    apt: 
-      name: nginx
-      state: latest
-      update_cache: yes
 
-  - name: 'check if nginx is running'
-    service:
-      name: nginx
-      state: started
 

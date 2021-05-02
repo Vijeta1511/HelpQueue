@@ -12,7 +12,7 @@ pipeline {
     environment {
     
         ENV_IP = '54.217.10.215'
-        RDS_DB_URL = 'jdbc:mysql://vijeta-db-3.csqfw1gtm6ou.eu-west-1.rds.amazonaws.com:3306/hq'
+        RDS_DB_URL = 'prod-rds.csqfw1gtm6ou.eu-west-1.rds.amazonaws.com:3306'
 
         
     }
