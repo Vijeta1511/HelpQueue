@@ -13,7 +13,6 @@ pipeline {
     
         ENV_IP = '54.217.10.215'
         RDS_DB_URL = 'prod-rds.csqfw1gtm6ou.eu-west-1.rds.amazonaws.com:3306'
-        ENDPOINT = 'jdbc:mysql://${RDS_DB_URL}/hq'
 
         
     }
@@ -54,7 +53,7 @@ pipeline {
             		dir('./backend'){
             		
 		            	sh 'mvn clean install -DskipTests'
-		            	sh 'sudo docker build --build-arg rds_url=${ENDPOINT} -t backend/backend-build:1.0.1 .'
+		            	sh 'sudo docker build --build-arg rds_url='jdbc:mysql://${RDS_DB_URL}/hq' -t backend/backend-build:1.0.1 .'
 		                sh 'sudo docker run -d -p 9001:9001 backend/backend-build:1.0.1'
 		                
                 }
