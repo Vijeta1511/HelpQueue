@@ -17,7 +17,7 @@ pipeline {
         
     }
 
-    
+    stages {   
         stage('backend-test') {
         
             steps {
