@@ -17,7 +17,7 @@ spec:
         - containerPort:  9001
         env:
         - name:  DATABASE_URL
-          value:  {{DB_URL}}
+          value:  {{DATABASE_URL}}
   replicas:  5
   selector:
     matchLabels:
