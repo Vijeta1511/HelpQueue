@@ -175,8 +175,8 @@ pipeline {
      
                 echo 'Creating kubernetes pods and load-balancer for nginx-reverse-proxy......'
                 
-                dir('./kubernetes'){ 
-                
+                dir('./kubernetes') { 
+                 
          		sh 'sudo kubectl apply -f nginx-reverse-proxy-deploy.yaml'
          		sh 'sudo kubectl apply -f nginx-reverse-proxy-lb.yaml'
          		sh 'sudo kubectl describe service nginx-reverse-proxy-lb'
