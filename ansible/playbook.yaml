@@ -52,7 +52,7 @@
       name: docker-ce 
       update_cache: yes
   
-  - name: Install aws-cli
+  - name: install aws-cli
     become: yes
     shell: |
 
@@ -61,7 +61,7 @@
       unzip awscliv2.zip
       sudo ./aws/install
       
-  - name: Install eksctl
+  - name: install eksctl
     become: yes
     shell: |
 
@@ -70,7 +70,7 @@
       sudo mv /tmp/eksctl /usr/local/bin
       eksctl version
 
-  - name: Install kubectl
+  - name: install kubectl
     become: yes
     shell: |
 
@@ -85,7 +85,6 @@
     apt_key: 
       url: https://pkg.jenkins.io/debian-stable/jenkins.io.key 
       state: present
-      
 
   - name: ensure the repository is configured
     become: yes
