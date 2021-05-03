@@ -6,7 +6,7 @@ spec:
   type:  ClusterIP
   ports:
   - protocol:  TCP
-    port:  80
+    port:  9001
     targetPort:  9001
   selector:
     app:  backend
