@@ -27,7 +27,7 @@ pipeline {
             	
             	echo 'Installing kubectl......'
             	sh 'sudo curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl'
-            	sh 'chmod +x kubectl'
+            	sh 'sudo chmod +x kubectl'
             	sh 'sudo mv kubectl /usr/local/bin'
             	sh 'sudo kubectl version'
             	sh 'kubectl get nodes'
