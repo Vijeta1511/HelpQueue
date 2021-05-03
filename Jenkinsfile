@@ -31,7 +31,9 @@ pipeline {
             	sh 'sudo mv kubectl /usr/local/bin'
             	sh 'sudo kubectl version'
             	sh 'kubectl get nodes'
-            		
+              }
+             		
+           }
             		
         }
 
