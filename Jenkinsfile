@@ -15,20 +15,6 @@ pipeline {
     }
     
     stages {  
-     
-        stage('installations') {
-        
-            steps {
-
-            	echo 'Installing eksctl......'
-            	sh 'curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp'
-            	sh 'sudo mv /tmp/eksctl /usr/local/bin'
-            	sh 'eksctl version'
-            	sh 'sudo aws eks --region eu-west-1 update-kubeconfig --name HelpQueueCluster'
-            	
-              }
-             		
-           }
             
         stage('backend-test') {
         
@@ -127,56 +113,5 @@ pipeline {
          		
             }
         }
-        
-        stage('backend-deploy') {
-            
-            steps {
-     
-                echo 'Creating kubernetes pods and load-balancer for backend......'
-                
-                dir('./kubernetes'){ 
-                
-         		sh 'sudo kubectl apply -f backend-deploy.yaml'
-         		sh 'sudo kubectl apply -f backend-cip.yaml'
-         		sh 'sudo kubectl describe service backend-cip'
-         		sh 'sudo kubectl get pods -o wide'
-         		
-         		
-         		}
-            }
-        }
-        
-        stage('frontend-deploy') {
-            
-            steps {
-     
-                echo 'Creating kubernetes pods and load-balancer for frontend......'
-                
-                dir('./kubernetes'){ 
-                
-         		sh 'sudo kubectl apply -f frontend-deploy.yaml'
-         		sh 'sudo kubectl apply -f frontend-cip.yaml'
-         		sh 'sudo kubectl describe service frontend-cip'
-         		sh 'sudo kubectl get pods -o wide'
-         		
-         		}
-            }
-        }
-        
-        stage('nginx-reverse-proxy-deploy') {
-            
-            steps {
-     
-                echo 'Creating kubernetes pods and load-balancer for nginx-reverse-proxy......'
-                
-                dir('./kubernetes') { 
-                 
-         		sh 'sudo kubectl apply -f nginx-reverse-proxy-deploy.yaml'
-         		sh 'sudo kubectl apply -f nginx-reverse-proxy-lb.yaml'
-         		sh 'sudo kubectl describe service nginx-reverse-proxy-lb'
-         		sh 'sudo kubectl get pods -o wide'
-         		}
-         	}
-         }
       }
   }
