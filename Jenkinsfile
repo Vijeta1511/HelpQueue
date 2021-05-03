@@ -21,15 +21,14 @@ pipeline {
             steps {
 
             	echo 'Installing eksctl......'
-            	sh 'sudo curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp'
+            	sh 'curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp'
             	sh 'sudo mv /tmp/eksctl /usr/local/bin'
-            	sh 'sudo eksctl version'
+            	sh 'eksctl version'
             	
             	echo 'Installing kubectl......'
-            	sh 'sudo curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl'
-            	sh 'sudo chmod +x kubectl'
+            	sh 'curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl'
+            	sh 'chmod +x kubectl'
             	sh 'sudo mv kubectl /usr/local/bin'
-            	sh 'sudo chown ubuntu /var/lib/jenkins/.kube'
             	sh 'kubectl get nodes'
               }
              		
