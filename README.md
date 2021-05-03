@@ -23,6 +23,31 @@ https://id.atlassian.com/invite/p/jira-software?id=gyqwPu57SBeukq3ig_dgRw
 ### Video with Project Deployment and Demo
 
 
+## Installation
+
+### Frontend
+
+HelpQueue requires [Node.js](https://nodejs.org/) v12+ to run.
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+cd frontend
+npm run install
+```
+
+### Backend
+
+HelpQueue requires JDK 8 and maven 3.6.3 to run.
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+cd frontend
+mvn clean install -DskipTests
+```
+
+
 ### Authors
 Vijeta Agrawal - Vijeta1511
 
