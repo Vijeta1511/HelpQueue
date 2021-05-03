@@ -17,7 +17,7 @@ spec:
         - containerPort:  9001
         env:
         - name:  DATABASE_URL
-          value:  "prod-rds.csqfw1gtm6ou.eu-west-1.rds.amazonaws.com:3306"
+          value:  "jdbc:mysql://prod-rds.csqfw1gtm6ou.eu-west-1.rds.amazonaws.com:3306/hq"
   replicas:  5
   selector:
     matchLabels:
