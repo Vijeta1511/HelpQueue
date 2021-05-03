@@ -22,6 +22,6 @@ https://id.atlassian.com/invite/p/jira-software?id=gyqwPu57SBeukq3ig_dgRw
 # Video with Project Deployment and Demo
 
 
-# Authors
+Authors
 Vijeta Agrawal - Vijeta1511
 
