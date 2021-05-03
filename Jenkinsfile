@@ -40,7 +40,6 @@ pipeline {
             		
 		            	sh 'mvn clean install -DskipTests'
 		            	sh 'sudo docker build -t backend .'
-		                sh 'sudo docker run -d -p 9001:9001 backend'
 		                
                 }
             }
@@ -57,7 +56,6 @@ pipeline {
             		sh 'npm install'
             		sh 'npm run build'
 	                sh 'sudo docker build -t frontend .'
-	                sh 'sudo docker run -d -p 80:80 frontend'
 	                
                 }
             }
