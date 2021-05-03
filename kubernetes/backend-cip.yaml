@@ -1,12 +1,12 @@
 apiVersion:  v1
 kind:  Service
 metadata:
-  name:  frontend-lb
+  name:  backend-cip
 spec:
-  type:  LoadBalancer
+  type:  ClusterIP
   ports:
   - protocol:  TCP
     port:  80
-    targetPort:  80
+    targetPort:  9001
   selector:
-    app:  frontend
+    app:  backend

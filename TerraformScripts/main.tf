@@ -144,7 +144,7 @@ resource "aws_security_group" "JenkinsEC2_sg" {
   vpc_id      = aws_vpc.main_vpc.id
 
   ingress {
-    description      = "HTTP from anywhere"
+    description      = "HTTP from anywhere - nginx-reverse-proxy port"
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
@@ -153,7 +153,7 @@ resource "aws_security_group" "JenkinsEC2_sg" {
   }
 
   ingress {
-    description      = "Nginx port"
+    description      = "jenkins port"
     from_port        = 8080
     to_port          = 8080
     protocol         = "tcp"
@@ -174,6 +174,15 @@ resource "aws_security_group" "JenkinsEC2_sg" {
     description      = "backend port"
     from_port        = 9001
     to_port          = 9001
+    protocol         = "tcp"
+    cidr_blocks      = [var.sg_cidr_blocks]
+    ipv6_cidr_blocks = [var.sg_ipv6_cidr_blocks]
+  }
+
+  ingress {
+    description      = "frontend port"
+    from_port        = 3000
+    to_port          = 3000
     protocol         = "tcp"
     cidr_blocks      = [var.sg_cidr_blocks]
     ipv6_cidr_blocks = [var.sg_ipv6_cidr_blocks]

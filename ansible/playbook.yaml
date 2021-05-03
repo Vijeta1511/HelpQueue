@@ -51,8 +51,8 @@
     apt: 
       name: docker-ce 
       update_cache: yes
-      
-  - name: "install aws-cli"
+
+  - name: install aws cli
     become: yes
     shell: |
 
@@ -61,7 +61,7 @@
       unzip awscliv2.zip
       sudo ./aws/install
       
-  - name: "install eksctl"
+  - name: install eksctl
     become: yes
     shell: |
 
@@ -70,7 +70,7 @@
       sudo mv /tmp/eksctl /usr/local/bin
       eksctl version
 
-  - name: "install kubectl"
+  - name: install kubectl
     become: yes
     shell: |
 

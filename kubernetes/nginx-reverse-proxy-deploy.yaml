@@ -15,7 +15,7 @@ spec:
         image:  vijetaagrawal/reverse-proxy:latest
         ports:
         - containerPort:  80
-  replicas:  1
+  replicas:  5
   selector:
     matchLabels:
       app:  nginx-reverse-proxy

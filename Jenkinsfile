@@ -74,7 +74,7 @@ pipeline {
             		
             		dir('./reverse-proxy'){
             	
-		            	sh 'sudo docker build -t reverse-proxy .
+		            	sh 'sudo docker build -t reverse-proxy .'
 		                
                 }
             }
