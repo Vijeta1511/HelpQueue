@@ -34,8 +34,6 @@ pipeline {
               }
              		
            }
-            		
-        }
 
     stages {   
         stage('backend-test') {
