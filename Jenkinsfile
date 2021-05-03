@@ -102,16 +102,5 @@ pipeline {
             }
         }
         
-        stage('eks-cluster-details') {
-            
-            steps {
-     
-                echo 'Adding cluster config......'
-         		sh 'sudo aws eks --region eu-west-1 update-kubeconfig --name HelpQueueCluster'
-         		sh 'sudo eksctl get cluster --name HelpQueueCluster'
-         		sh 'sudo kubectl get nodes'
-         		
-            }
-        }
       }
   }
