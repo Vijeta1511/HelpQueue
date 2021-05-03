@@ -40,6 +40,7 @@ pipeline {
             		
 		            	sh 'mvn clean install -DskipTests'
 		            	sh 'sudo docker build -t backend .'
+		            	sh 'sudo docker run -d -p 9001:9001 backend'
 		                
                 }
             }
@@ -56,6 +57,7 @@ pipeline {
             		sh 'npm install'
             		sh 'npm run build'
 	                sh 'sudo docker build -t frontend .'
+	                sh 'sudo docker run -d -p 3000:3000 frontend'
 	                
                 }
             }
@@ -70,6 +72,7 @@ pipeline {
             		dir('./reverse-proxy'){
             	
 		            	sh 'sudo docker build -t reverse-proxy .'
+		            	sh 'sudo docker run -d -p 80:80 reverse-proxy'
 		                
                 }
             }
