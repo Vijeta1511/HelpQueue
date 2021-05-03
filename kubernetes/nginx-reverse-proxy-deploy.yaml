@@ -1,0 +1,21 @@
+apiVersion:  apps/v1
+kind:  Deployment
+metadata:
+  name:  nginx-reverse-proxy-deployment
+  labels:
+    app:  nginx-reverse-proxy-deploy
+spec:
+  template:
+    metadata:
+      labels:
+        app: nginx-reverse-proxy
+    spec:
+      containers:
+      - name:  nginx-reverse-proxy-container
+        image:  vijetaagrawal/reverse-proxy:latest
+        ports:
+        - containerPort:  80
+  replicas:  1
+  selector:
+    matchLabels:
+      app:  nginx-reverse-proxy

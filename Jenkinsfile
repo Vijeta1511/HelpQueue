@@ -40,8 +40,9 @@ pipeline {
             		
             		dir('./backend'){
             		
+            			sh 'export DATABASE_URL=jdbc:mysql://prod-rds.csqfw1gtm6ou.eu-west-1.rds.amazonaws.com:3306/hq'
 		            	sh 'mvn clean install -DskipTests'
-		            	sh 'sudo docker build --build-arg rds_url=jdbc:mysql://${RDS_DB_URL}/hq -t backend .'
+		            	sh 'sudo docker build -t backend .'
 		                sh 'sudo docker run -d -p 9001:9001 backend'
 		                
                 }
@@ -65,6 +66,20 @@ pipeline {
             }
         }
         
+        stage('nginx-reverseProxy-dockerize') {
+            
+            steps {
+     
+                echo 'Building nginx reverse proxy image......'
+            		
+            		dir('./reverse-proxy'){
+            	
+		            	sh 'sudo docker build -t reverse-proxy .
+		                
+                }
+            }
+        }
+        
         stage('tagging-docker-images') {
             
             steps {
@@ -74,7 +89,7 @@ pipeline {
          		sh 'sudo docker login docker.io -u="${DOCKER_CREDS_USR}" -p="${DOCKER_CREDS_PSW}"'
          		sh 'sudo docker tag frontend vijetaagrawal/frontend'
          		sh 'sudo docker tag backend vijetaagrawal/backend'
-         		
+         		sh 'sudo docker tag reverse-proxy vijetaagrawal/reverse-proxy'
 
             }
         }
@@ -86,8 +101,71 @@ pipeline {
                 echo 'Pushing frontend and backend images to dockerhub......'
          		sh 'sudo docker push vijetaagrawal/frontend'
          		sh 'sudo docker push vijetaagrawal/backend'
+         		sh 'sudo docker push vijetaagrawal/reverse-proxy'
+            }
+        }
+        
+        stage('eks-cluster-details') {
+            
+            steps {
+     
+                echo 'Adding cluster config......'
+         		sh 'sudo aws eks --region eu-west-1 update-kubeconfig --name DemoCluster'
+         		sh 'sudo eksctl get cluster --name DemoCluster'
+         		sh 'sudo kubectl get nodes'
          		
-
+            }
+        }
+        
+        stage('backend-deploy') {
+            
+            steps {
+     
+                echo 'Creating kubernetes pods and load-balancer for backend......'
+                
+                dir('./kubernetes'){ 
+                
+         		sh 'sudo kubectl apply -f backend-deploy.yaml'
+         		sh 'sudo kubectl apply -f backend-lb.yaml'
+         		sh 'sudo kubectl describe service backend-lb'
+         		sh 'sudo kubectl get pods -o wide'
+         		
+         		
+         		}
+            }
+        }
+        
+        stage('frontend-deploy') {
+            
+            steps {
+     
+                echo 'Creating kubernetes pods and load-balancer for frontend......'
+                
+                dir('./kubernetes'){ 
+                
+         		sh 'sudo kubectl apply -f frontend-deploy.yaml'
+         		sh 'sudo kubectl apply -f frontend-lb.yaml'
+         		sh 'sudo kubectl describe service frontend-lb'
+         		sh 'sudo kubectl get pods -o wide'
+         		
+         		}
+            }
+        }
+        
+        stage('nginx-reverse-proxy-deploy') {
+            
+            steps {
+     
+                echo 'Creating kubernetes pods and load-balancer for nginx-reverse-proxy......'
+                
+                dir('./kubernetes'){ 
+                
+         		sh 'sudo kubectl apply -f nginx-reverse-proxy-deploy.yaml'
+         		sh 'sudo kubectl apply -f nginx-reverse-proxy-lb.yaml'
+         		sh 'sudo kubectl describe service nginx-reverse-proxy-lb'
+         		sh 'sudo kubectl get pods -o wide'
+         		
+         		}
             }
         }
     }
