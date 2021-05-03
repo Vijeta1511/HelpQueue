@@ -181,9 +181,8 @@ pipeline {
          		sh 'sudo kubectl apply -f nginx-reverse-proxy-lb.yaml'
          		sh 'sudo kubectl describe service nginx-reverse-proxy-lb'
          		sh 'sudo kubectl get pods -o wide'
-         		
          		}
-            }
+         	}
+         }
         }
-    }
-}
+       }
