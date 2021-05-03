@@ -12,7 +12,73 @@
     become: yes
     apt:
       name: openjdk-8-jdk
-      state: present      
+      state: present     
+      
+  - name: "Add nodejs apt key"
+    apt_key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      state: present
+
+  - name: "Add nodejs 12.x ppa for apt repo"
+    apt_repository:
+      repo: deb https://deb.nodesource.com/node_12.x bionic main
+      update_cache: yes
+  
+  - name: "Install nodejs"
+    apt:
+      update_cache: yes
+      name: nodejs
+      state: present
+
+  - name: "Install NPM-distributed command-line tools"
+    npm:
+      global: yes
+      name: "{{ item }}"
+    with_items:
+      - firebase-tools
+
+  - name: ensure repository key is installed
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: ensure docker registry is available
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu bionic stable
+      state: present
+
+  - name: ensure docker and dependencies are installed
+    apt: 
+      name: docker-ce 
+      update_cache: yes
+  
+  - name: Install aws-cli
+    become: yes
+    shell: |
+
+      echo -e "\n Installing aws-cli"
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      
+  - name: Install aws-cli
+    become: yes
+    shell: |
+
+      echo -e "\n Installing aws-cli"
+      curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+      sudo mv /tmp/eksctl /usr/local/bin
+      eksctl version
+
+  - name: Install aws-cli
+    become: yes
+    shell: |
+
+      echo -e "\n Installing aws-cli"
+      curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+      chmod +x kubectl
+      sudo mv kubectl /usr/local/bin/
+      kubectl version
 
   - name: ensure the jenkins apt repository key is installed
     become: yes
@@ -52,42 +118,4 @@
     debug:
       var: result.stdout
         
-  - name: "Add nodejs apt key"
-    apt_key:
-      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-      state: present
-
-  - name: "Add nodejs 12.x ppa for apt repo"
-    apt_repository:
-      repo: deb https://deb.nodesource.com/node_12.x bionic main
-      update_cache: yes
   
-  - name: "Install nodejs"
-    apt:
-      update_cache: yes
-      name: nodejs
-      state: present
-
-  - name: "Install NPM-distributed command-line tools"
-    npm:
-      global: yes
-      name: "{{ item }}"
-    with_items:
-      - firebase-tools
-
-  - name: ensure repository key is installed
-    apt_key:
-      url: https://download.docker.com/linux/ubuntu/gpg
-      state: present
-
-  - name: ensure docker registry is available
-    apt_repository:
-      repo: deb https://download.docker.com/linux/ubuntu bionic stable
-      state: present
-
-  - name: ensure docker and dependencies are installed
-    apt: 
-      name: docker-ce 
-      update_cache: yes
-
-
