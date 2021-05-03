@@ -3,8 +3,8 @@ A spring boot full stack application using rest api in backend and reactJs for f
 
 # Technologies used
 
-Issue backlog management - Jira
-Agile Methodologies – Scrum
+- Issue backlog management - Jira
+- Agile Methodologies – Scrum
 Back end CRUD Application – Java / Spring Boot
 Front end – React JS, HTML, CSS
 Test coverage of 80% on software (Junit, Mockito)
