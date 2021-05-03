@@ -15,7 +15,8 @@ pipeline {
         
     }
     
-    stages {   
+    stages {  
+     
         stage('installations') {
         
             steps {
@@ -34,8 +35,7 @@ pipeline {
               }
              		
            }
-
-    stages {   
+            
         stage('backend-test') {
         
             steps {
@@ -184,5 +184,5 @@ pipeline {
          		}
          	}
          }
-        }
-       }
+      }
+  }
