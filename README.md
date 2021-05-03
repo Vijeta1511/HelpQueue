@@ -16,10 +16,15 @@ VM Setup – Ansible and Terraform
 Containerisation Tools – Docker and Kubernetes
 
 
-# Project Management Board Invite Link
+
+
+Project Management Board Invite Link
 https://id.atlassian.com/invite/p/jira-software?id=gyqwPu57SBeukq3ig_dgRw
 
-# Video with Project Deployment and Demo
+
+
+
+Video with Project Deployment and Demo
 
 
 Authors
