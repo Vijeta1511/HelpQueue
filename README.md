@@ -1,7 +1,7 @@
 # HelpQueue
 A spring boot full stack application using rest api in backend and reactJs for frontend.
 
-# Technologies used
+### Technologies used
 
 - Issue backlog management - Jira
 - Agile Methodologies – Scrum
@@ -16,13 +16,13 @@ A spring boot full stack application using rest api in backend and reactJs for f
 - Containerisation Tools – Docker and Kubernetes
 
 
-## Project Management Board Invite Link
+### Project Management Board Invite Link
 https://id.atlassian.com/invite/p/jira-software?id=gyqwPu57SBeukq3ig_dgRw
 
 
-## Video with Project Deployment and Demo
+### Video with Project Deployment and Demo
 
 
-## Authors
+### Authors
 Vijeta Agrawal - Vijeta1511
 
