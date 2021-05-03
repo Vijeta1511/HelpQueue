@@ -51,7 +51,7 @@
     apt: 
       name: docker-ce 
       update_cache: yes
-  
+      
   - name: "install aws-cli"
     become: yes
     shell: |
