@@ -21,6 +21,7 @@ https://id.atlassian.com/invite/p/jira-software?id=gyqwPu57SBeukq3ig_dgRw
 
 
 ### Video with Project Deployment and Demo
+https://drive.google.com/file/d/1spdinZFk39s1lLiQB_7CGLFTyVY6E_XY/view?usp=sharing
 
 This video shows the deployment of Help Queue application
 - From an EC2 on AWS called Setup VM which has terraform, Ansible, aws-cli, eksctl, kubectl installed.
